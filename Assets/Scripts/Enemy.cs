@@ -20,6 +20,15 @@ public class Enemy : MonoBehaviour
         StartCoroutine("FireTimer");
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Reflected")
+        {
+            TakeDamage(1);
+            Destroy(collision.gameObject);
+        }
+    }
+
     public void TakeDamage(float damage)
     {
         hp -= damage;
@@ -47,6 +56,7 @@ public class Enemy : MonoBehaviour
             Fire();
         }
     }
+
 
     
 }

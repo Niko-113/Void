@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical"); 
         // transform.position += new Vector3(horizontal, vertical, 0) * Time.deltaTime * speed;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             sword.Swing();
@@ -46,14 +47,15 @@ public class Player : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.tag == "Enemy" || collider.tag == "Bullet")
+        if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet")
         {
             hp--;
             if (hp <= 0)
             {
                 // Perish
+                Debug.Log("Game Over");
             }
         }
     }

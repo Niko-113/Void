@@ -38,7 +38,10 @@ public class Sword : MonoBehaviour
            if (c.tag == "Enemy") c.GetComponent<Enemy>().TakeDamage(1);
            if (c.tag == "Bullet")
            {
-               c.GetComponent<Rigidbody2D>().velocity = Vector2.up;
+               Rigidbody2D bullet = c.GetComponent<Rigidbody2D>();
+               bullet.velocity = new Vector2(bullet.velocity.x, Mathf.Abs(bullet.velocity.y * -2));
+               c.tag = "Reflected";
+               c.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
            }
             
            Debug.Log("Slashed " + c.name);
