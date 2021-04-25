@@ -35,7 +35,12 @@ public class Sword : MonoBehaviour
         isSlashing = true;
         foreach (Collider2D c in collidersInRange)
         {
-           //if (c.tag == "Enemy") c.GetComponent<Enemy>().TakeDamage(1);
+           if (c.tag == "Enemy") c.GetComponent<Enemy>().TakeDamage(1);
+           if (c.tag == "Bullet")
+           {
+               c.GetComponent<Rigidbody2D>().velocity = Vector2.up;
+           }
+            
            Debug.Log("Slashed " + c.name);
         }
 

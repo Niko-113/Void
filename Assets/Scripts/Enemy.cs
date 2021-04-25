@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    Rigidbody2D rb;
+
+    public GameObject bullet;
+    public GameObject player;
+
     public float hp;
     public int points;
+
+    void Awake()
+    {
+        rb = this.GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.down;
+        player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine("FireTimer");
+    }
 
     public void TakeDamage(float damage)
     {
@@ -13,8 +26,27 @@ public class Enemy : MonoBehaviour
         if (hp <= 0) Die();
     }
 
+    void Fire()
+    {
+        GameObject shot = Instantiate(bullet, transform.position, Quaternion.identity);
+        shot.GetComponent<Bullet>().TargetPlayer(player.transform);
+        Destroy(shot, 10);
+    }
+
     public void Die()
     {
-        Destroy(this.gameObject, 1f);
+        StopCoroutine("FireTimer");
+        Destroy(this.gameObject);
     }
+
+    IEnumerator FireTimer()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(5);
+            Fire();
+        }
+    }
+
+    
 }

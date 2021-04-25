@@ -6,13 +6,17 @@ public class Player : MonoBehaviour
 {
     public Sword sword;
     public Animator animator;
+    Rigidbody2D rb;
 
-    bool isDashing;
+    
     public float speed = 1;
     public float dashSpeed = 8;
+    public float hp = 3;
+
+    bool isDashing;
     float horizontal;
     float vertical;
-    Rigidbody2D rb;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +44,18 @@ public class Player : MonoBehaviour
             StartCoroutine("Dash");            
         }
 
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.tag == "Enemy" || collider.tag == "Bullet")
+        {
+            hp--;
+            if (hp <= 0)
+            {
+                // Perish
+            }
+        }
     }
 
     IEnumerator Dash()
