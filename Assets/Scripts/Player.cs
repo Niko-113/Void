@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
             if (hp <= 0)
             {
                 // Perish
-                Debug.Log("Game Over");
             }
         }
     }

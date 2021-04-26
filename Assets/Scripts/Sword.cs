@@ -39,12 +39,14 @@ public class Sword : MonoBehaviour
            if (c.tag == "Bullet")
            {
                Rigidbody2D bullet = c.GetComponent<Rigidbody2D>();
-               bullet.velocity = new Vector2(bullet.velocity.x, Mathf.Abs(bullet.velocity.y * -2));
+               
+               float angle = c.transform.position.x - transform.position.x;
+               bullet.velocity = new Vector2(angle * 2, Mathf.Abs(bullet.velocity.y * -1) + 2);
                c.tag = "Reflected";
                c.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
            }
             
-           Debug.Log("Slashed " + c.name);
+          // Debug.Log("Slashed " + c.name);
         }
 
         isSlashing = false;
