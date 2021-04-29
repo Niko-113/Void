@@ -46,7 +46,7 @@ public class Sword : MonoBehaviour
                c.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
            }
             
-          // Debug.Log("Slashed " + c.name);
+           Debug.Log("Slashed " + c.name);
         }
 
         isSlashing = false;

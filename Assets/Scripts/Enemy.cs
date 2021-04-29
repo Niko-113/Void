@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public GameObject bullet;
     public GameObject player;
 
     public float hp;
@@ -35,12 +34,7 @@ public class Enemy : MonoBehaviour
         if (hp <= 0) Die();
     }
 
-    void Fire()
-    {
-        GameObject shot = Instantiate(bullet, transform.position, Quaternion.identity);
-        shot.GetComponent<Bullet>().TargetPlayer(player.transform);
-        Destroy(shot, 10);
-    }
+    public abstract void Fire();
 
     public void Die()
     {
