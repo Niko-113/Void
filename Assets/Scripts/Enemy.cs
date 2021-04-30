@@ -11,10 +11,13 @@ public abstract class Enemy : MonoBehaviour
     public float hp;
     public int points;
 
+    public float xDir;
+    public float yDir;
+
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        rb.velocity = Vector2.down;
+        rb.velocity = new Vector2(xDir, yDir);
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine("FireTimer");
     }
