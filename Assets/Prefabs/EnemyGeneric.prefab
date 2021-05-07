@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   hp: 1
-  points: 0
+  points: 10
   xDir: 0
   yDir: -0.5
   bullet: {fileID: 4638245149655255509, guid: c5485be482c81cb2580d734182c6618f, type: 3}

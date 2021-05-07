@@ -145,7 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   hp: 1
-  points: 0
+  points: 20
   xDir: 0
   yDir: 0
   dashSpeed: 3

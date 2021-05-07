@@ -41,6 +41,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
+        GameManager.master.AddPoints(points);
         StopCoroutine("FireTimer");
         Destroy(this.gameObject);
     }

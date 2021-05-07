@@ -52,10 +52,7 @@ public class Player : MonoBehaviour
         if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet")
         {
             hp--;
-            if (hp <= 0)
-            {
-                // Perish
-            }
+            GameManager.master.PlayerHurt();
         }
     }
 
