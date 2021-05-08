@@ -7,6 +7,7 @@ public abstract class Enemy : MonoBehaviour
     Rigidbody2D rb;
 
     public GameObject player;
+    public GameObject particle;
 
     public float hp;
     public int points;
@@ -33,6 +34,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        StartCoroutine("HitFlicker");
         hp -= damage;
         if (hp <= 0) Die();
     }
@@ -41,8 +43,10 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
+        GameObject newParticle = GameObject.Instantiate(particle, this.transform.position, Quaternion.identity);
+        Destroy(newParticle, 1f);
         GameManager.master.AddPoints(points);
-        StopCoroutine("FireTimer");
+        StopAllCoroutines();
         Destroy(this.gameObject);
     }
 
@@ -53,6 +57,13 @@ public abstract class Enemy : MonoBehaviour
             yield return new WaitForSeconds(5);
             Fire();
         }
+    }
+
+    IEnumerator HitFlicker()
+    {
+        this.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 0.75f, 0.79f, 1));
+        yield return new WaitForSeconds(0.1f);
+        this.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
     }
 
 
