@@ -30,6 +30,8 @@ public class Mimic : Enemy
         if (collision.gameObject.tag == "Player")
         {
             // Explode
+            GameObject newParticle = GameObject.Instantiate(particle, this.transform.position, Quaternion.identity);
+            Destroy(newParticle, 1f);
             Destroy(this.gameObject);
         }
     }

@@ -59,9 +59,11 @@ public class Player : MonoBehaviour
     IEnumerator Dash()
     {
         // Dash forward if idle
+        this.GetComponent<TrailRenderer>().enabled = true;
         if (rb.velocity.magnitude == 0) rb.velocity = new Vector2(0, 1);
         rb.velocity = (rb.velocity.normalized * dashSpeed);
         yield return new WaitForSeconds(0.5f);
         isDashing = false;
+        this.GetComponent<TrailRenderer>().enabled = false;
     }
 }
