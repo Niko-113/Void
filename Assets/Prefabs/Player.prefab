@@ -331,6 +331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword: {fileID: 1263868822235310483}
   animator: {fileID: 0}
+  hurt: {fileID: 8300000, guid: 25b0f9d59cd9389fca78709b7ecb5a35, type: 3}
+  death: {fileID: 8300000, guid: a3227eefd0d40d624916ec33fcc1eaa9, type: 3}
+  deathParticle: {fileID: 2408683740462082538, guid: cfc8b142451379dcb87715dbc7d2e095, type: 3}
   speed: 3
   dashSpeed: 8
   hp: 3

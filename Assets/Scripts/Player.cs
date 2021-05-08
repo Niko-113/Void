@@ -8,14 +8,21 @@ public class Player : MonoBehaviour
     public Animator animator;
     Rigidbody2D rb;
 
-    
+    public AudioClip hurt;
+    public AudioClip death;
+
+    public GameObject deathParticle;
+
     public float speed = 1;
     public float dashSpeed = 8;
     public float hp = 3;
 
-    bool isDashing;
     float horizontal;
     float vertical;
+
+    bool isDashing;
+    bool invuln = false;
+   
     
     // Start is called before the first frame update
     void Start()
@@ -49,10 +56,20 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if (collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet")
+        if ((collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet") && !invuln)
         {
+            SoundManager.speaker.PlaySound(hurt);
+            StartCoroutine("Flicker");
             hp--;
             GameManager.master.PlayerHurt();
+            if (hp <= 0)
+            {
+                SoundManager.speaker.PlaySound(death);
+                GameObject newParticle = GameObject.Instantiate(deathParticle, transform.position, Quaternion.identity);
+                Destroy (newParticle, 1f);
+                this.transform.position = new Vector3(-500, -500, -500);
+                this.GetComponent<Player>().enabled = false;
+            }
         }
     }
 
@@ -65,5 +82,20 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         isDashing = false;
         this.GetComponent<TrailRenderer>().enabled = false;
+    }
+
+    IEnumerator Flicker()
+    {
+        invuln = true;
+        Renderer model = this.transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
+        for (int i = 0; i < 7; i++)
+        {
+            model.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            model.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+       
+        invuln = false;
     }
 }
