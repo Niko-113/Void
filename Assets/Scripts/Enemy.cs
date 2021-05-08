@@ -8,6 +8,8 @@ public abstract class Enemy : MonoBehaviour
 
     public GameObject player;
     public GameObject particle;
+    
+    public AudioClip hurt;
 
     public float hp;
     public int points;
@@ -36,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
     {
         StartCoroutine("HitFlicker");
         hp -= damage;
+        SoundManager.speaker.PlaySound(hurt);
         if (hp <= 0) Die();
     }
 
