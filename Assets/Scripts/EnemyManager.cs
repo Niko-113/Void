@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
                 Group group = enemyWave.groups[i];
                 for (int j = 0; j < group.enemyTypes.Length; j++)
                 {
-                    Enemy newEnemy = Instantiate(group.enemyTypes[j].enemy, group.spawnPoint).GetComponent<Enemy>();
+                    Enemy newEnemy = Instantiate(group.enemyTypes[j].enemy, group.spawnPoint.position + new Vector3(group.enemyTypes[j].offsetX, group.enemyTypes[j].offsetY, 0), Quaternion.identity).GetComponent<Enemy>();
                     newEnemy.GetComponent<Rigidbody2D>().velocity = new Vector2(group.moveX, group.moveY);
                     newEnemy.startVelocity = new Vector2(group.moveX, group.moveY);
                     yield return new WaitForSeconds(group.enemyTypes[j].cooldown);
@@ -44,6 +44,8 @@ public class EnemyManager : MonoBehaviour
     public struct Type
     {
         public GameObject enemy;
+        public float offsetX;
+        public float offsetY;
         public float cooldown;
     }
 
