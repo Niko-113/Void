@@ -56,10 +56,18 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collider)
     {
-        if ((collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet") && !invuln)
+        if ((collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Bullet"))
         {
-            SoundManager.speaker.PlaySound(hurt);
+            TakeDamage();
+        }
+    }
+
+    public void TakeDamage()
+    {
+        if (!invuln)
+        {
             StartCoroutine("Flicker");
+            SoundManager.speaker.PlaySound(hurt);
             hp--;
             GameManager.master.PlayerHurt();
             if (hp <= 0)

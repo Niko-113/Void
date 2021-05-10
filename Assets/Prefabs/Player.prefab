@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9027486838551547444}
   - component: {fileID: 6246956108320590755}
   - component: {fileID: 8907226444524654729}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hitbox
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5344148188914733825}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0045, y: 0.0185, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.33333334}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 2}
   m_Children: []
   m_Father: {fileID: 7790553890695282995}
   m_RootOrder: 3
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 1563985882420503779}
   - component: {fileID: 7372429887203315192}
   - component: {fileID: 9031090859497426223}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}

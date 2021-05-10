@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     Enemy newEnemy = Instantiate(group.enemyTypes[j].enemy, group.spawnPoint).GetComponent<Enemy>();
                     newEnemy.GetComponent<Rigidbody2D>().velocity = new Vector2(group.moveX, group.moveY);
+                    newEnemy.startVelocity = new Vector2(group.moveX, group.moveY);
                     yield return new WaitForSeconds(group.enemyTypes[j].cooldown);
 
                 }

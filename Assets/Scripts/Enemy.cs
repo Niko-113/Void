@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     public GameObject player;
     public GameObject particle;
@@ -14,13 +14,12 @@ public abstract class Enemy : MonoBehaviour
     public float hp;
     public int points;
 
-    public float xDir;
-    public float yDir;
+    public Vector2 startVelocity;
 
     void Awake()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(xDir, yDir);
+        // rb.velocity = startVelocity;
         player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine("FireTimer");
     }
