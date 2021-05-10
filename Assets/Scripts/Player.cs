@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public AudioClip hurt;
     public AudioClip death;
+    public AudioClip dash;
 
     public GameObject deathParticle;
 
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing)
         {
             isDashing = true;
+            SoundManager.speaker.PlaySound(dash);
             StartCoroutine("Dash");            
         }
 
