@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 1263868822235310483}
   - component: {fileID: 8934146214084182842}
   - component: {fileID: 7011027979712343997}
+  - component: {fileID: 251407135483593869}
   m_Layer: 0
   m_Name: MeleeField
   m_TagString: Untagged
@@ -162,7 +163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 02c58b4de3828bf54a83647569b622f1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -258,6 +259,24 @@ PolygonCollider2D:
       - {x: 0.010973173, y: -0.019495735}
       - {x: 0.84305745, y: 0.55288583}
       - {x: 0.68175, y: 0.73295003}
+--- !u!114 &251407135483593869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931997123290475768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7231867365378495551
 GameObject:
   m_ObjectHideFlags: 0
