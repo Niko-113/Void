@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
     public static GameManager master;
     public Text scoreText;
     public Text livesText;
+    public Button endButton;
+    public Button continueButton;
+
+    public Player player;
 
     private int score = 0;
-    public int lives = 3;
 
     void Start()
     {
@@ -27,13 +30,43 @@ public class GameManager : MonoBehaviour
 
     public void PlayerHurt()
     {
-        lives--;
-        livesText.text = ("LIVES: " + lives);
-        if (lives <= 0) GameOver();
+        livesText.text = ("LIVES: " + player.hp);
+        if (player.hp <= 0) StartCoroutine("GameOver");
     }
 
-    private void GameOver(){
+    IEnumerator GameOver()
+    {
+        while (Time.timeScale > 0)
+        {
+            Time.timeScale -= 0.01f;
+            if (Time.timeScale < 0.1f)
+            {
+                endButton.gameObject.SetActive(true);
+                continueButton.gameObject.SetActive(true);
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+        
+    }
 
+    public void ReturnToMenu()
+    {
+        StopCoroutine("GameOver");
+        Time.timeScale = 1;
+        SceneLoader.loader.Load("MenuScene");
+    }
+
+    public void Continue()
+    {
+        endButton.gameObject.SetActive(false);
+        continueButton.gameObject.SetActive(false);
+        StopCoroutine("GameOver");
+        score = 0;
+        AddPoints(0);
+        player.enabled = true;
+        player.Respawn();
+        livesText.text = ("LIVES: " + 3);
+        Time.timeScale = 1;
     }
 
 

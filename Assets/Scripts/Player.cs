@@ -83,6 +83,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Respawn()
+    {
+        hp = 3;
+        StartCoroutine("Flicker");
+        this.transform.position = new Vector3(0, -1, 0);
+    }
+
     IEnumerator Dash()
     {
         // Dash forward if idle
