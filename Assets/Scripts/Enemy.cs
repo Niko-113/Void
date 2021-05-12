@@ -52,6 +52,13 @@ public abstract class Enemy : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void Flee()
+    {
+        StopCoroutine("Fire");
+        rb.velocity *= 3;
+        Destroy(this.gameObject, 5f);
+    }
+
     IEnumerator FireTimer()
     {
         while(true)
