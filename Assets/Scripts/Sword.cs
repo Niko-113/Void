@@ -33,6 +33,7 @@ public class Sword : MonoBehaviour
     public void Swing()
     {
         isSlashing = true;
+        this.GetComponent<Renderer>().material.SetColor("_WireColor", Color.yellow);
         foreach (Collider2D c in collidersInRange)
         {
            if (c.tag == "Enemy") c.GetComponent<Enemy>().TakeDamage(1);
@@ -45,10 +46,15 @@ public class Sword : MonoBehaviour
                c.tag = "Reflected";
                c.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
            }
-            
-           Debug.Log("Slashed " + c.name);
         }
+        StartCoroutine("Cooldown");
+        
+    }
 
+    IEnumerator Cooldown()
+    {
+        yield return new WaitForSeconds(0.7f);
+        this.GetComponent<Renderer>().material.SetColor("_WireColor", Color.magenta);
         isSlashing = false;
     }
 }

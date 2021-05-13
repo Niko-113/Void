@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         vertical = Input.GetAxis("Vertical"); 
         // transform.position += new Vector3(horizontal, vertical, 0) * Time.deltaTime * speed;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !sword.isSlashing)
         {
             sword.Swing();
             animator.SetTrigger("Swing");
