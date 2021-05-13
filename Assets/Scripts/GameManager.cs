@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
     public static GameManager master;
     public Text scoreText;
     public Text livesText;
+    public Text endText;
     public Button endButton;
     public Button continueButton;
 
     public Player player;
+    public EnemyManager enemyManager;
 
     private int score = 0;
 
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale -= 0.01f;
             if (Time.timeScale < 0.1f)
             {
+                endText.gameObject.SetActive(true);
                 endButton.gameObject.SetActive(true);
                 continueButton.gameObject.SetActive(true);
             }
@@ -58,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void Continue()
     {
+        endText.gameObject.SetActive(false);
         endButton.gameObject.SetActive(false);
         continueButton.gameObject.SetActive(false);
         StopCoroutine("GameOver");
@@ -67,6 +71,20 @@ public class GameManager : MonoBehaviour
         player.Respawn();
         livesText.text = ("LIVES: " + 3);
         Time.timeScale = 1;
+    }
+
+    public void CheckForEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        if (enemies.Length == 0 && enemyManager.finished) Victory();
+    }
+
+    void Victory()
+    {
+        endText.text = "        VICTORY\nFINAL SCORE: " + score.ToString("D4");
+        endText.gameObject.SetActive(true);
+        Time.timeScale = 0;
+        endButton.gameObject.SetActive(true);
     }
 
 

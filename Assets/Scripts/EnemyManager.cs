@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public Wave enemyWave;
+    public bool finished;
 
     IEnumerator Start()
     {
@@ -37,6 +38,8 @@ public class EnemyManager : MonoBehaviour
         }
 
         Debug.Log("done with wave");
+        finished = true;
+        GameManager.master.CheckForEnemies();
     }
 
     [Serializable]

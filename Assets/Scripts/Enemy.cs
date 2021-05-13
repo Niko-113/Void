@@ -58,7 +58,12 @@ public abstract class Enemy : MonoBehaviour
     {
         StopAllCoroutines();
         rb.velocity *= 3;
-        Destroy(this.gameObject, 5f);
+        Destroy(this.gameObject, 4f);
+    }
+
+    public void OnDestroy()
+    {
+        GameManager.master.CheckForEnemies();
     }
 
     IEnumerator FireTimer()
