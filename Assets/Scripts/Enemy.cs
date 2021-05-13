@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
     public GameObject warningParticle;
     
     public AudioClip hurt;
+    public AudioClip fireSound;
 
     public float hp;
     public int points;
@@ -55,7 +56,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void Flee()
     {
-        StopCoroutine("Fire");
+        StopAllCoroutines();
         rb.velocity *= 3;
         Destroy(this.gameObject, 5f);
     }
@@ -74,6 +75,7 @@ public abstract class Enemy : MonoBehaviour
         GameObject newWarnParticle = GameObject.Instantiate(warningParticle, this.transform);
         yield return new WaitForSeconds(0.4f);
         Destroy(newWarnParticle);
+        if (fireSound != null) SoundManager.speaker.PlaySound(fireSound);
         Fire();
     }
 

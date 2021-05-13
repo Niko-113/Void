@@ -7,6 +7,7 @@ public class Needle : Enemy
 
     Vector2 direction;
     LineRenderer laser;
+    public AudioClip laserSound;
 
     bool isFiring;
 
@@ -26,6 +27,7 @@ public class Needle : Enemy
         }
     }
 
+    // Fire just telegraphs the laser
     public override void Fire()
     {
         rb.velocity = Vector2.zero;
@@ -35,6 +37,7 @@ public class Needle : Enemy
         StartCoroutine("Solidify");
     }
 
+    // Turn the telegraph into solid laser
     IEnumerator Solidify()
     {
         isFiring = true;
@@ -44,11 +47,11 @@ public class Needle : Enemy
         laser.SetPosition(0, this.transform.position);
         laser.SetPosition(1, ray.GetPoint(100));
         yield return new WaitForSeconds(1);
+        SoundManager.speaker.PlaySound(laserSound);
         laser.material.SetColor("_Color", Color.red);
         for (int i = 0; i < 120; i++)
         {
             RaycastHit2D hit = Physics2D.Raycast(from, to, 1000, 1 << LayerMask.NameToLayer("Player"));
-            // Debug.DrawRay(from, to, Color.blue, 3);
             if (hit)
             {
                 hit.collider.GetComponentInParent<Player>().TakeDamage();
