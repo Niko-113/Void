@@ -7,7 +7,8 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
 
     public GameObject player;
-    public GameObject particle;
+    public GameObject deathParticle;
+    public GameObject warningParticle;
     
     public AudioClip hurt;
 
@@ -45,7 +46,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
-        GameObject newParticle = GameObject.Instantiate(particle, this.transform.position, Quaternion.identity);
+        GameObject newParticle = GameObject.Instantiate(deathParticle, this.transform.position, Quaternion.identity);
         Destroy(newParticle, 1f);
         GameManager.master.AddPoints(points);
         StopAllCoroutines();
@@ -64,8 +65,16 @@ public abstract class Enemy : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(5);
-            Fire();
+            StartCoroutine("Warning");
         }
+    }
+
+    IEnumerator Warning()
+    {
+        GameObject newWarnParticle = GameObject.Instantiate(warningParticle, this.transform);
+        yield return new WaitForSeconds(0.4f);
+        Destroy(newWarnParticle);
+        Fire();
     }
 
     IEnumerator HitFlicker()

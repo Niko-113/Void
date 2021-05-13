@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  particle: {fileID: 2408683740462082538, guid: cfc8b142451379dcb87715dbc7d2e095, type: 3}
+  deathParticle: {fileID: 2408683740462082538, guid: cfc8b142451379dcb87715dbc7d2e095, type: 3}
+  warningParticle: {fileID: 5421294416460834035, guid: 2a38189c92a6d12d2bca1eff87141824, type: 3}
   hurt: {fileID: 8300000, guid: 72b9906a4d5e28f6880806d62a7a3f6e, type: 3}
   hp: 1
   points: 10
