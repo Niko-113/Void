@@ -10,13 +10,13 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        StartCoroutine(SpawnEnemies(enemyWave.cooldown));
+        StartCoroutine("SpawnEnemies");
 
         yield break;
 
     }
 
-    IEnumerator SpawnEnemies(float cooldownBetweenWaves)
+    IEnumerator SpawnEnemies()
     {
         for (int i = 0; i < enemyWave.groups.Length; i++)
         {
@@ -25,16 +25,17 @@ public class EnemyManager : MonoBehaviour
                 Group group = enemyWave.groups[i];
                 for (int j = 0; j < group.enemyTypes.Length; j++)
                 {
-                    Enemy newEnemy = Instantiate(group.enemyTypes[j].enemy, group.spawnPoint.position + new Vector3(group.enemyTypes[j].offsetX, group.enemyTypes[j].offsetY, 0), Quaternion.identity).GetComponent<Enemy>();
-                    newEnemy.GetComponent<Rigidbody2D>().velocity = new Vector2(group.moveX, group.moveY);
-                    newEnemy.startVelocity = new Vector2(group.moveX, group.moveY);
-                    yield return new WaitForSeconds(group.enemyTypes[j].cooldown);
+                    Type type = group.enemyTypes[j];
+                    Enemy newEnemy = Instantiate(type.enemy, type.spawnPoint.position + new Vector3(type.offsetX, type.offsetY, 0), Quaternion.identity).GetComponent<Enemy>();
+                    newEnemy.GetComponent<Rigidbody2D>().velocity = new Vector2(type.moveX, type.moveY);
+                    newEnemy.startVelocity = new Vector2(type.moveX, type.moveY);
+                    yield return new WaitForSeconds(group.enemyTypes[j].cooldown); // cooldown between individual enemies
 
                 }
             }
 
 
-            yield return new WaitForSeconds(cooldownBetweenWaves); // cooldown between groups
+            yield return new WaitForSeconds(enemyWave.groups[i].cooldown); // cooldown between groups
         }
 
         Debug.Log("done with wave");
@@ -46,8 +47,11 @@ public class EnemyManager : MonoBehaviour
     public struct Type
     {
         public GameObject enemy;
+        public Transform spawnPoint;
         public float offsetX;
         public float offsetY;
+        public float moveX;
+        public float moveY;
         public float cooldown;
     }
 
@@ -55,15 +59,12 @@ public class EnemyManager : MonoBehaviour
     public struct Group
     {
         public Type[] enemyTypes;
-        public Transform spawnPoint;
-        public float moveX;
-        public float moveY;
+        public float cooldown;
     }
 
     [Serializable]
     public struct Wave
     {
         public Group[] groups;
-        public float cooldown;
     }
 }

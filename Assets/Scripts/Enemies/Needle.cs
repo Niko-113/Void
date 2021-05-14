@@ -49,14 +49,14 @@ public class Needle : Enemy
         yield return new WaitForSeconds(1);
         SoundManager.speaker.PlaySound(laserSound);
         laser.material.SetColor("_Color", Color.red);
-        for (int i = 0; i < 120; i++)
+        for (int i = 0; i < 60; i++)
         {
             RaycastHit2D hit = Physics2D.Raycast(from, to, 1000, 1 << LayerMask.NameToLayer("Player"));
             if (hit)
             {
                 hit.collider.GetComponentInParent<Player>().TakeDamage();
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.001f);
         }
         laser.enabled = false;
         isFiring = false;

@@ -70,7 +70,7 @@ public abstract class Enemy : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3);
             StartCoroutine("Warning");
         }
     }
